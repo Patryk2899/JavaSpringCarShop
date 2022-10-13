@@ -24,7 +24,10 @@ public class CarModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String carBrand;
-    private long carPartId;
+
+    @ManyToOne
+    @JoinColumn(name = "car_part_id", nullable = false)
+    private CarPart carPart;
 
     @CreationTimestamp
     private LocalDateTime createDateTime;

@@ -7,6 +7,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,9 +24,15 @@ public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long orderId;
-    private long carPartId;
     private long quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "car_part_id", nullable = false)
+    private CarPart carPart;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
 
     @CreationTimestamp
     private LocalDateTime createDateTime;

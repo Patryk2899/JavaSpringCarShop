@@ -7,6 +7,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -30,6 +32,12 @@ public class CarPart {
     private String name;
     private int quantity;
     private float price;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "carPart")
+    private Set<CarModel> carModels = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "carPart")
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     @CreationTimestamp
     private LocalDateTime createDateTime;
